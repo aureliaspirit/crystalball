@@ -626,3 +626,108 @@ body.heartbox-open { overflow: hidden; }
   .globe { width: 74%; }
   .globe-stand { bottom: -5%; width: 44%; height: 14%; }
 }
+
+
+/* v1.1.6 撤回误调：恢复 v1.1.4 的球体大小 / 透明度 / 底座位置，保留下方双按钮排布 */
+.globe-section {
+  margin-top: -22px;
+  padding: 0 0 2px;
+}
+.globe-wrap {
+  width: min(90vw, 450px);
+  aspect-ratio: 1 / 1.04;
+  transform: translateY(0);
+}
+.crystal-glow {
+  width: 88%;
+  height: 88%;
+  bottom: 9%;
+  opacity: 1;
+}
+.globe {
+  width: 86%;
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255,255,255,.42), rgba(255,255,255,.11) 15%, rgba(255,255,255,.045) 28%, rgba(204,227,255,.06) 48%, rgba(255,255,255,.018) 68%, rgba(255,255,255,.008) 100%);
+  border: 1px solid rgba(255,255,255,.36);
+  backdrop-filter: blur(6px) saturate(128%);
+  -webkit-backdrop-filter: blur(6px) saturate(128%);
+  box-shadow:
+    inset 0 0 26px rgba(255,255,255,.11),
+    inset 0 -10px 24px rgba(0, 0, 0, .10),
+    0 24px 72px rgba(0,0,0,.24),
+    0 0 64px rgba(255,214,234,.12);
+}
+.globe::before {
+  content: "";
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle at 52% 36%, rgba(255,255,255,.10), transparent 52%);
+}
+.globe-backstars {
+  z-index: 1;
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: .50;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.86) 0 1px, transparent 1.4px),
+    radial-gradient(circle, rgba(255,214,234,.72) 0 1px, transparent 1.4px),
+    radial-gradient(circle, rgba(204,227,255,.66) 0 1px, transparent 1.4px);
+  background-size: 92px 92px, 132px 132px, 170px 170px;
+  background-position: 12px 18px, 44px 70px, 70px 24px;
+  filter: blur(.15px);
+  mix-blend-mode: normal;
+  mask-image: radial-gradient(circle at center, rgba(0,0,0,.98) 0 66%, rgba(0,0,0,.84) 78%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,.98) 0 66%, rgba(0,0,0,.84) 78%, transparent 100%);
+}
+.globe-reflection, .globe-inner-shadow, .heart-field { position: absolute; z-index: 2; }
+.heart-field { z-index: 3; }
+.reflection-a {
+  width: 22%; height: 32%; left: 18%; top: 14%;
+  background: linear-gradient(180deg, rgba(255,255,255,.56), rgba(255,255,255,.015));
+  filter: blur(1px); transform: rotate(-12deg);
+}
+.reflection-b {
+  width: 10%; height: 12%; right: 22%; top: 24%;
+  background: rgba(255,255,255,.18); filter: blur(2px);
+}
+.globe-inner-shadow {
+  background:
+    radial-gradient(circle at 50% 120%, rgba(0,0,0,.18), transparent 38%),
+    radial-gradient(circle at 50% 100%, rgba(255,255,255,.08), transparent 56%);
+}
+.globe-stand {
+  bottom: -1.5%;
+  width: 50%;
+  height: 17%;
+  border-radius: 34px 34px 28px 28px;
+  background: linear-gradient(180deg, rgba(255,255,255,.24), rgba(255,214,234,.14) 26%, rgba(14,19,44,.84));
+  box-shadow: inset 0 10px 18px rgba(255,255,255,.12), 0 18px 42px rgba(0,0,0,.30);
+}
+.globe-stand::before {
+  width: 76%;
+  height: 19%;
+  left: 12%;
+  top: 12%;
+  background: rgba(255,255,255,.12);
+}
+.action-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  justify-content: stretch;
+}
+.action-row button { width: 100%; text-align: center; }
+@media (max-width: 430px) {
+  .globe-wrap { width: min(90vw, 372px); aspect-ratio: 1 / 1.08; transform: translateY(-4px); }
+  .globe { width: 86%; }
+  .globe-stand { bottom: -2.5%; width: 52%; height: 17%; }
+  .globe-section { margin-top: -22px; padding-bottom: 2px; }
+}
+@media (max-height: 760px) {
+  .globe-wrap { width: min(84vw, 360px); aspect-ratio: 1 / 1.02; transform: translateY(-6px); }
+  .globe-stand { bottom: -2%; width: 52%; }
+}
