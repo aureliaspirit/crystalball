@@ -7,7 +7,7 @@
 - 水晶球整体更大，并向上移动一点
 - 球体玻璃质感更通透，收心语时会更亮
 - “轻轻摇一摇”和“收一条心语”保持左右对称
-- “带回 Heartbox”改为在当前水晶球页面内嵌打开 Heartbox，不再新开外部页面
+- v1.1.4：已去掉“带回 Heartbox”按钮，避免打开独立 Heartbox 后拿不到你主屏幕版 Heartbox 的本地数据
 - 更新 PWA cache 到 crystal-ball-v1-1-3
 
 ## v1.1.2 更新
@@ -28,7 +28,7 @@
 - 标题会根据时间显示：清晨心语 / 今日心语 / 今夜心语 / 半夜心语
 - 可以把当前心语“收进口袋”
 - 可以“复制给 Spirit”
-- 可以“带回 Heartbox”：自动复制心语，并打开 Heartbox 链接，附带 from=crystalball 和 message 参数
+- v1.1.4 仅保留“复制给 Spirit”，不再尝试内嵌或跳转 Heartbox
 - 摇动和收到心语时增加轻微反馈
 - 更新 PWA cache 到 crystal-ball-v1-1
 

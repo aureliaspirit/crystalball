@@ -1,8 +1,8 @@
 {
   "name": "心心水晶球",
   "short_name": "水晶球",
-  "description": "一个装着轻轻晃动小心心的漂亮水晶球小 app。v1.1.3 支持心语留存、复制给 Spirit、内嵌打开 Heartbox。",
-  "start_url": "./index.html?v=1.1.3",
+  "description": "一个装着轻轻晃动小心心的漂亮水晶球小 app。v1.1.4 支持心语留存、复制给 Spirit，并进一步调整了水晶球透明感。",
+  "start_url": "./index.html?v=1.1.4",
   "scope": "./",
   "display": "standalone",
   "background_color": "#070b1d",
