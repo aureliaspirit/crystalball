@@ -35,12 +35,12 @@ body {
 .app-shell {
   width: min(760px, 100%);
   margin: 0 auto;
-  padding: calc(18px + env(safe-area-inset-top)) 18px 40px;
+  padding: calc(12px + env(safe-area-inset-top)) 18px 40px;
   position: relative; z-index: 1;
 }
 .topbar {
   display: flex; align-items: flex-start; justify-content: space-between;
-  gap: 16px; margin-bottom: 16px;
+  gap: 14px; margin-bottom: 10px;
 }
 .eyebrow {
   margin: 0 0 2px; color: var(--soft); font-size: 13px;
@@ -50,7 +50,7 @@ h1 {
   margin: 0; font-size: clamp(30px, 8vw, 46px);
   line-height: 1.05; letter-spacing: -.04em;
 }
-.subtitle { margin: 8px 0 0; color: var(--muted); line-height: 1.5; }
+.subtitle { margin: 6px 0 0; color: var(--muted); line-height: 1.45; }
 h2 { margin: 0 0 10px; font-size: 20px; }
 .moon-badge {
   width: 58px; height: 58px; border-radius: 22px;
@@ -63,23 +63,23 @@ h2 { margin: 0 0 10px; font-size: 20px; }
   background: linear-gradient(145deg, rgba(255,255,255,.11), rgba(255,255,255,.06));
   border: 1px solid var(--line);
   border-radius: 28px;
-  padding: 20px;
+  padding: 18px;
   box-shadow: 0 20px 60px var(--shadow);
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
   margin-bottom: 16px;
 }
-.hero { min-height: 118px; }
-.fortune-text, .wish-text { margin: 0; font-size: 19px; line-height: 1.72; }
-.globe-section { display: grid; place-items: center; padding: 10px 0 18px; }
+.hero { min-height: 94px; }
+.fortune-text, .wish-text { margin: 0; font-size: 18px; line-height: 1.64; }
+.globe-section { display: grid; place-items: center; padding: 0 0 6px; margin-top: -6px; }
 .globe-wrap {
-  width: min(92vw, 440px); aspect-ratio: 1 / 1.18; position: relative;
+  width: min(84vw, 380px); aspect-ratio: 1 / 1.08; position: relative;
   display: grid; place-items: center;
 }
 .crystal-glow {
   position: absolute; width: 82%; height: 82%; border-radius: 50%;
   background: radial-gradient(circle, rgba(255,214,234,.22), rgba(204,227,255,.12) 42%, transparent 68%);
-  filter: blur(18px); bottom: 17%; animation: glowPulse 5.5s ease-in-out infinite;
+  filter: blur(18px); bottom: 12%; animation: glowPulse 5.5s ease-in-out infinite;
 }
 .globe {
   width: 78%; aspect-ratio: 1 / 1; border-radius: 50%; position: relative;
@@ -131,8 +131,15 @@ h2 { margin: 0 0 10px; font-size: 20px; }
   color: #fff0f6;
   text-shadow: 0 0 18px rgba(255, 255, 255, .34), 0 0 22px rgba(255, 155, 199, .30);
 }
+.heart.hollow {
+  color: rgba(255, 248, 252, .96);
+  text-shadow: 0 0 12px rgba(255,255,255,.28), 0 0 18px rgba(255,155,199,.22);
+}
+.heart.hollow.small { font-size: 18px; }
+.heart.hollow.medium { font-size: 24px; }
+.heart.hollow.large { font-size: 30px; }
 .globe-stand {
-  position: absolute; bottom: 6%; width: 44%; height: 18%;
+  position: absolute; bottom: 3%; width: 44%; height: 16%;
   border-radius: 30px 30px 26px 26px;
   background: linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,214,234,.18) 28%, rgba(14,19,44,.88));
   border: 1px solid rgba(255,255,255,.16);
@@ -143,6 +150,10 @@ h2 { margin: 0 0 10px; font-size: 20px; }
   border-radius: 999px; background: rgba(255,255,255,.14);
 }
 .controls .button-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.controls .main-actions { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; }
+.controls .main-actions button { width: 100%; text-align: center; padding-inline: 14px; }
+.controls .utility-actions { justify-content: center; margin-top: 10px; }
+.refresh-button { min-height: 42px; padding: 0 18px; font-size: 14px; opacity: .92; }
 .status-text { margin: 14px 0 0; color: var(--soft); line-height: 1.55; }
 button {
   appearance: none; border: 0; font: inherit; color: inherit; cursor: pointer;
@@ -225,15 +236,31 @@ button:active { transform: scale(.97); }
   background: linear-gradient(145deg, rgba(255,214,234,.14), rgba(204,227,255,.08));
 }
 .pocket.saved .pocket-text { color: var(--text); }
+.globe.received {
+  box-shadow:
+    inset 0 0 54px rgba(255,255,255,.30),
+    inset 0 -24px 40px rgba(0, 0, 0, .16),
+    0 26px 90px rgba(0,0,0,.34),
+    0 0 86px rgba(255,214,234,.34),
+    0 0 118px rgba(204,227,255,.18);
+}
 .globe.received::after {
-  content: ""; position: absolute; inset: 7%; border-radius: 50%; pointer-events: none;
-  background: radial-gradient(circle, rgba(255,255,255,.24), transparent 42%);
-  animation: receiveGlow 1.2s ease both;
+  content: ""; position: absolute; inset: 4%; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, rgba(255,255,255,.44), rgba(255,214,234,.24) 34%, transparent 58%);
+  animation: receiveGlow 1.65s ease both;
+}
+.crystal-glow.received-glow {
+  animation: receiveAura 1.65s ease both;
 }
 @keyframes receiveGlow {
-  0% { opacity: 0; transform: scale(.88); }
-  35% { opacity: 1; transform: scale(1); }
-  100% { opacity: 0; transform: scale(1.08); }
+  0% { opacity: 0; transform: scale(.82); }
+  32% { opacity: 1; transform: scale(1.02); }
+  100% { opacity: 0; transform: scale(1.16); }
+}
+@keyframes receiveAura {
+  0% { opacity: .35; transform: scale(.92); filter: blur(18px); }
+  38% { opacity: .95; transform: scale(1.08); filter: blur(14px); }
+  100% { opacity: .48; transform: scale(1); filter: blur(18px); }
 }
 @media (max-width: 420px) {
   .section-title-row { align-items: flex-start; flex-direction: column; }
@@ -258,3 +285,26 @@ button:active { transform: scale(.97); }
   display: inline-block; margin-right: 6px; color: rgba(255,214,234,.88); font-weight: 700;
 }
 .pool-list[hidden] { display: none; }
+
+
+/* v1.1.2 微调：更亮的收心语、更紧凑的主屏、更对称的按钮 */
+@media (max-width: 430px) {
+  .app-shell { padding-left: 14px; padding-right: 14px; }
+  .topbar { margin-bottom: 8px; }
+  .eyebrow { font-size: 11px; letter-spacing: .12em; }
+  h1 { font-size: clamp(28px, 7.6vw, 38px); }
+  .moon-badge { width: 48px; height: 48px; border-radius: 18px; font-size: 24px; }
+  .card { border-radius: 24px; padding: 16px; margin-bottom: 12px; }
+  .hero { min-height: 82px; }
+  .fortune-text, .wish-text { font-size: 17px; line-height: 1.58; }
+  .globe-wrap { width: min(78vw, 330px); aspect-ratio: 1 / 1.02; }
+  .globe { width: 74%; }
+  .globe-section { margin-top: -10px; padding-bottom: 2px; }
+  .primary-button, .ghost-button { min-height: 46px; padding-inline: 12px; }
+  .controls .utility-actions { margin-top: 8px; }
+}
+@media (max-height: 760px) {
+  .hero { min-height: 74px; }
+  .globe-wrap { width: min(72vw, 300px); aspect-ratio: 1 / .98; }
+  .globe-section { margin-top: -14px; padding-bottom: 0; }
+}

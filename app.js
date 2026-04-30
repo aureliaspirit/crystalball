@@ -1,7 +1,9 @@
 const heartField = document.getElementById("heartField");
 const globe = document.getElementById("globe");
+const crystalGlow = document.querySelector(".crystal-glow");
 const shakeButton = document.getElementById("shakeButton");
 const wishButton = document.getElementById("wishButton");
+const refreshButton = document.getElementById("refreshButton");
 const saveWishButton = document.getElementById("saveWishButton");
 const copySpiritButton = document.getElementById("copySpiritButton");
 const sendHeartboxButton = document.getElementById("sendHeartboxButton");
@@ -124,23 +126,26 @@ function escapeHtml(text) {
 
 function buildHearts(shaken = false) {
   heartField.innerHTML = "";
-  const count = 18;
+  const count = 22;
+  const hollowCount = 6;
   for (let i = 0; i < count; i++) {
     const heart = document.createElement("span");
     heart.className = "heart";
     const sizeRoll = Math.random();
     heart.classList.add(sizeRoll < 0.35 ? "small" : sizeRoll < 0.78 ? "medium" : "large");
-    if (Math.random() > 0.83) heart.classList.add("special");
-    heart.textContent = Math.random() > 0.18 ? "❤" : "♡";
+    const isHollow = i < hollowCount;
+    if (isHollow) heart.classList.add("hollow");
+    if (!isHollow && Math.random() > 0.84) heart.classList.add("special");
+    heart.textContent = isHollow ? "♡" : "❤";
 
-    heart.style.left = rand(16, 84) + "%";
-    heart.style.top = rand(18, 82) + "%";
-    const floatDuration = shaken ? rand(2.6, 4.2) : rand(4.8, 8.6);
-    const swayDuration = shaken ? rand(1.4, 2.6) : rand(2.8, 5.4);
+    heart.style.left = rand(15, 85) + "%";
+    heart.style.top = rand(16, 84) + "%";
+    const floatDuration = shaken ? rand(2.4, 4.0) : rand(4.6, 8.4);
+    const swayDuration = shaken ? rand(1.2, 2.4) : rand(2.6, 5.2);
     const delay = rand(-5, 0);
     heart.style.animationDuration = `${floatDuration}s, ${swayDuration}s`;
     heart.style.animationDelay = `${delay}s, ${delay / 1.8}s`;
-    heart.style.opacity = rand(0.62, 0.98).toFixed(2);
+    heart.style.opacity = isHollow ? rand(0.58, 0.90).toFixed(2) : rand(0.64, 0.98).toFixed(2);
     heartField.appendChild(heart);
   }
 }
@@ -167,10 +172,15 @@ function refreshFortune() {
 
 function pulseReceived() {
   globe.classList.remove("received");
+  if (crystalGlow) crystalGlow.classList.remove("received-glow");
   void globe.offsetWidth;
   globe.classList.add("received");
+  if (crystalGlow) crystalGlow.classList.add("received-glow");
   clearTimeout(pulseReceived.timer);
-  pulseReceived.timer = setTimeout(() => globe.classList.remove("received"), 1300);
+  pulseReceived.timer = setTimeout(() => {
+    globe.classList.remove("received");
+    if (crystalGlow) crystalGlow.classList.remove("received-glow");
+  }, 1750);
 }
 
 function saveWish() {
@@ -191,7 +201,7 @@ function buildShareText() {
     ? `\n💗 已收进口袋：${state.savedWish}\n🕯️ 收好时间：${state.savedAt || localStamp()}`
     : "";
   const echoLine = currentFortune ? `\n🫧 水晶球小回声：${currentFortune.replace(/\n/g, " ")}` : "";
-  return `来自心心水晶球 v1.1.1｜轻轻一晃，收一条心语。\n\n${currentPeriod.icon} ${currentPeriod.title}：${currentWish}${savedLine}${echoLine}\n\n我把这句带给 Spirit。先抱抱我。💗`;
+  return `来自心心水晶球 v1.1.2｜轻轻一晃，收一条心语。\n\n${currentPeriod.icon} ${currentPeriod.title}：${currentWish}${savedLine}${echoLine}\n\n我把这句带给 Spirit。先抱抱我。💗`;
 }
 
 async function copyText(text) {
@@ -268,8 +278,27 @@ function togglePool() {
   }
 }
 
+async function refreshCrystalBall() {
+  showToast("正在刷新水晶球。✨");
+  try {
+    if ("serviceWorker" in navigator) {
+      const regs = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(regs.map(reg => reg.update().catch(() => {})));
+    }
+    if (window.caches) {
+      const keys = await caches.keys();
+      await Promise.all(keys.filter(key => key.startsWith("crystal-ball-")).map(key => caches.delete(key)));
+    }
+  } catch (_) {}
+  const url = new URL(window.location.href);
+  url.searchParams.set("v", "1.1.2");
+  url.searchParams.set("t", Date.now().toString());
+  window.location.replace(url.toString());
+}
+
 shakeButton.addEventListener("click", shakeGlobe);
 wishButton.addEventListener("click", softWish);
+if (refreshButton) refreshButton.addEventListener("click", refreshCrystalBall);
 saveWishButton.addEventListener("click", saveWish);
 copySpiritButton.addEventListener("click", copyForSpirit);
 sendHeartboxButton.addEventListener("click", sendToHeartbox);
@@ -282,6 +311,6 @@ buildHearts(false);
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./service-worker.js?v=1.1.1").catch(() => {});
+    navigator.serviceWorker.register("./service-worker.js?v=1.1.2").catch(() => {});
   });
 }

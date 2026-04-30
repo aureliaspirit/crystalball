@@ -1,10 +1,10 @@
-const CACHE_NAME = "crystal-ball-v1-1-1";
+const CACHE_NAME = "crystal-ball-v1-1-2";
 const ASSETS = [
   "./",
   "./index.html",
-  "./style.css?v=1.1.1",
-  "./app.js?v=1.1.1",
-  "./manifest.json?v=1.1.1",
+  "./style.css?v=1.1.2",
+  "./app.js?v=1.1.2",
+  "./manifest.json?v=1.1.2",
   "./icons/icon-192.png",
   "./icons/icon-512.png"
 ];
