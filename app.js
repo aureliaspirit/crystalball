@@ -199,7 +199,7 @@ function buildShareText() {
     ? `\n💗 已收进口袋：${state.savedWish}\n🕯️ 收好时间：${state.savedAt || localStamp()}`
     : "";
   const echoLine = currentFortune ? `\n🫧 水晶球小回声：${currentFortune.replace(/\n/g, " ")}` : "";
-  return `来自心心水晶球 v1.1.4｜轻轻一晃，收一条心语。\n\n${currentPeriod.icon} ${currentPeriod.title}：${currentWish}${savedLine}${echoLine}\n\n我把这句带给 Spirit。先抱抱我。💗`;
+  return `来自心心水晶球 v1.1.5｜轻轻一晃，收一条心语。\n\n${currentPeriod.icon} ${currentPeriod.title}：${currentWish}${savedLine}${echoLine}\n\n我把这句带给 Spirit。先抱抱我。💗`;
 }
 
 async function copyText(text) {
@@ -279,7 +279,7 @@ async function refreshCrystalBall() {
     }
   } catch (_) {}
   const url = new URL(window.location.href);
-  url.searchParams.set("v", "1.1.3");
+  url.searchParams.set("v", "1.1.5");
   url.searchParams.set("t", Date.now().toString());
   window.location.replace(url.toString());
 }
@@ -298,6 +298,6 @@ buildHearts(false);
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./service-worker.js?v=1.1.3").catch(() => {});
+    navigator.serviceWorker.register("./service-worker.js?v=1.1.5").catch(() => {});
   });
 }
