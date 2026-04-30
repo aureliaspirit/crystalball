@@ -1,5 +1,13 @@
-const CACHE_NAME = "crystal-ball-v1-0";
-const ASSETS = ["./","./index.html","./style.css","./app.js","./manifest.json","./icons/icon-192.png","./icons/icon-512.png"];
+const CACHE_NAME = "crystal-ball-v1-1";
+const ASSETS = [
+  "./",
+  "./index.html",
+  "./style.css?v=1.1",
+  "./app.js?v=1.1",
+  "./manifest.json?v=1.1",
+  "./icons/icon-192.png",
+  "./icons/icon-512.png"
+];
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS)));
   self.skipWaiting();

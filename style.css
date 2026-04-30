@@ -205,3 +205,38 @@ button:active { transform: scale(.97); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; }
 }
+
+/* v1.1 心语留存版 */
+.section-title-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-bottom: 10px;
+}
+.section-title-row h2 { margin: 0; }
+.time-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 28px; padding: 0 10px; border-radius: 999px;
+  color: rgba(255,248,252,.78); background: rgba(255,255,255,.09);
+  border: 1px solid rgba(255,255,255,.12); font-size: 12px; white-space: nowrap;
+}
+.action-row { margin-top: 16px; }
+.soft-button { min-height: 42px; padding: 0 16px; font-size: 14px; }
+.pocket-text { margin: 0; color: var(--muted); line-height: 1.68; }
+.pocket.saved {
+  background: linear-gradient(145deg, rgba(255,214,234,.14), rgba(204,227,255,.08));
+}
+.pocket.saved .pocket-text { color: var(--text); }
+.globe.received::after {
+  content: ""; position: absolute; inset: 7%; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, rgba(255,255,255,.24), transparent 42%);
+  animation: receiveGlow 1.2s ease both;
+}
+@keyframes receiveGlow {
+  0% { opacity: 0; transform: scale(.88); }
+  35% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.08); }
+}
+@media (max-width: 420px) {
+  .section-title-row { align-items: flex-start; flex-direction: column; }
+  .soft-button { flex: 1 1 100%; }
+}
+.soft-line { color: var(--soft); font-size: 14px; }

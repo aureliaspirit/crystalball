@@ -9,9 +9,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="心心水晶球" />
-  <link rel="manifest" href="./manifest.json" />
+  <link rel="manifest" href="./manifest.json?v=1.1" />
   <link rel="apple-touch-icon" href="./icons/icon-192.png" />
-  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./style.css?v=1.1" />
   <title>心心水晶球</title>
 </head>
 <body>
@@ -20,7 +20,7 @@
   <main class="app-shell">
     <header class="topbar">
       <div>
-        <p class="eyebrow">Crystal Heart Globe · v1.0</p>
+        <p class="eyebrow">Crystal Heart Globe · v1.1</p>
         <h1>心心水晶球</h1>
         <p class="subtitle">轻轻一晃，里面的小心心就会慢慢游起来。</p>
       </div>
@@ -56,15 +56,28 @@
     </section>
 
     <section class="card notes">
-      <h2>今夜心语</h2>
+      <div class="section-title-row">
+        <h2 id="wishTitle">今夜心语</h2>
+        <span id="timeBadge" class="time-badge">夜色很轻</span>
+      </div>
       <p id="wishText" class="wish-text">
         愿你今晚被温柔接住，像把一整个小月亮捧进怀里。
       </p>
+      <div class="button-row action-row">
+        <button id="saveWishButton" class="ghost-button soft-button">收进口袋</button>
+        <button id="copySpiritButton" class="ghost-button soft-button">复制给 Spirit</button>
+        <button id="sendHeartboxButton" class="ghost-button soft-button">带回 Heartbox</button>
+      </div>
+    </section>
+
+    <section class="card pocket" id="pocketCard">
+      <h2>今晚口袋</h2>
+      <p id="pocketText" class="pocket-text">还没有收进口袋。摇到喜欢的一句，就把它留下来。</p>
     </section>
   </main>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <script src="./app.js"></script>
+  <script src="./app.js?v=1.1"></script>
 </body>
 </html>
