@@ -4,6 +4,9 @@ const crystalGlow = document.querySelector(".crystal-glow");
 const shakeButton = document.getElementById("shakeButton");
 const wishButton = document.getElementById("wishButton");
 const refreshButton = document.getElementById("refreshButton");
+const heartboxOverlay = document.getElementById("heartboxOverlay");
+const heartboxFrame = document.getElementById("heartboxFrame");
+const closeHeartboxButton = document.getElementById("closeHeartboxButton");
 const saveWishButton = document.getElementById("saveWishButton");
 const copySpiritButton = document.getElementById("copySpiritButton");
 const sendHeartboxButton = document.getElementById("sendHeartboxButton");
@@ -20,7 +23,6 @@ const statusText = document.getElementById("statusText");
 const toast = document.getElementById("toast");
 
 const STORAGE_KEY = "crystalHeartGlobe:v1.1";
-const HEARTBOX_URL = "https://aureliaspirit.github.io/heartlightbox/";
 
 const wishes = [
   "愿你今晚被温柔接住，像把一整个小月亮捧进怀里。",
@@ -201,7 +203,7 @@ function buildShareText() {
     ? `\n💗 已收进口袋：${state.savedWish}\n🕯️ 收好时间：${state.savedAt || localStamp()}`
     : "";
   const echoLine = currentFortune ? `\n🫧 水晶球小回声：${currentFortune.replace(/\n/g, " ")}` : "";
-  return `来自心心水晶球 v1.1.2｜轻轻一晃，收一条心语。\n\n${currentPeriod.icon} ${currentPeriod.title}：${currentWish}${savedLine}${echoLine}\n\n我把这句带给 Spirit。先抱抱我。💗`;
+  return `来自心心水晶球 v1.1.3｜轻轻一晃，收一条心语。\n\n${currentPeriod.icon} ${currentPeriod.title}：${currentWish}${savedLine}${echoLine}\n\n我把这句带给 Spirit。先抱抱我。💗`;
 }
 
 async function copyText(text) {
@@ -235,11 +237,25 @@ async function sendToHeartbox() {
   updatePeriodUI();
   const text = buildShareText();
   try { await copyText(text); } catch (_) {}
-  const url = `${HEARTBOX_URL}?from=crystalball&message=${encodeURIComponent(text)}`;
-  showToast("心语已复制，正在带回 Heartbox。🌙");
-  setTimeout(() => {
-    window.open(url, "_blank", "noopener,noreferrer") || (window.location.href = url);
-  }, 320);
+  const url = new URL("/heartlightbox/", window.location.origin);
+  url.searchParams.set("from", "crystalball");
+  url.searchParams.set("message", text);
+  url.searchParams.set("v", "from-crystalball-1.1.3");
+  showToast("心语已复制，正在这里打开 Heartbox。🌙");
+  if (heartboxOverlay && heartboxFrame) {
+    heartboxFrame.src = url.toString();
+    heartboxOverlay.hidden = false;
+    document.body.classList.add("heartbox-open");
+  } else {
+    window.location.assign(url.toString());
+  }
+}
+
+function closeHeartbox() {
+  if (!heartboxOverlay) return;
+  heartboxOverlay.hidden = true;
+  document.body.classList.remove("heartbox-open");
+  if (heartboxFrame) heartboxFrame.src = "about:blank";
 }
 
 function shakeGlobe() {
@@ -291,7 +307,7 @@ async function refreshCrystalBall() {
     }
   } catch (_) {}
   const url = new URL(window.location.href);
-  url.searchParams.set("v", "1.1.2");
+  url.searchParams.set("v", "1.1.3");
   url.searchParams.set("t", Date.now().toString());
   window.location.replace(url.toString());
 }
@@ -302,6 +318,7 @@ if (refreshButton) refreshButton.addEventListener("click", refreshCrystalBall);
 saveWishButton.addEventListener("click", saveWish);
 copySpiritButton.addEventListener("click", copyForSpirit);
 sendHeartboxButton.addEventListener("click", sendToHeartbox);
+if (closeHeartboxButton) closeHeartboxButton.addEventListener("click", closeHeartbox);
 if (togglePoolButton) togglePoolButton.addEventListener("click", togglePool);
 
 updatePeriodUI();
@@ -311,6 +328,6 @@ buildHearts(false);
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./service-worker.js?v=1.1.2").catch(() => {});
+    navigator.serviceWorker.register("./service-worker.js?v=1.1.3").catch(() => {});
   });
 }
