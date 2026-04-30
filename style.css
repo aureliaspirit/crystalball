@@ -240,3 +240,21 @@ button:active { transform: scale(.97); }
   .soft-button { flex: 1 1 100%; }
 }
 .soft-line { color: var(--soft); font-size: 14px; }
+
+
+/* v1.1.1 心语池可见版 */
+.mini-button { min-height: 34px; padding: 0 13px; font-size: 13px; }
+.pool-list {
+  margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.12);
+}
+.pool-list h3 {
+  margin: 12px 0 8px; font-size: 15px; color: rgba(255,248,252,.82);
+}
+.pool-list ol {
+  margin: 0; padding-left: 21px; color: rgba(255,248,252,.76); line-height: 1.6;
+}
+.pool-list li { margin: 8px 0; }
+.pool-list li span {
+  display: inline-block; margin-right: 6px; color: rgba(255,214,234,.88); font-weight: 700;
+}
+.pool-list[hidden] { display: none; }

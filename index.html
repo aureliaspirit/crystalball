@@ -9,9 +9,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="心心水晶球" />
-  <link rel="manifest" href="./manifest.json?v=1.1" />
+  <link rel="manifest" href="./manifest.json?v=1.1.1" />
   <link rel="apple-touch-icon" href="./icons/icon-192.png" />
-  <link rel="stylesheet" href="./style.css?v=1.1" />
+  <link rel="stylesheet" href="./style.css?v=1.1.1" />
   <title>心心水晶球</title>
 </head>
 <body>
@@ -20,7 +20,7 @@
   <main class="app-shell">
     <header class="topbar">
       <div>
-        <p class="eyebrow">Crystal Heart Globe · v1.1</p>
+        <p class="eyebrow">Crystal Heart Globe · v1.1.1</p>
         <h1>心心水晶球</h1>
         <p class="subtitle">轻轻一晃，里面的小心心就会慢慢游起来。</p>
       </div>
@@ -74,10 +74,19 @@
       <h2>今晚口袋</h2>
       <p id="pocketText" class="pocket-text">还没有收进口袋。摇到喜欢的一句，就把它留下来。</p>
     </section>
+
+    <section class="card pool-card">
+      <div class="section-title-row">
+        <h2>心语小池</h2>
+        <button id="togglePoolButton" class="ghost-button soft-button mini-button">看看心语池</button>
+      </div>
+      <p id="poolSummary" class="pocket-text">心语池正在发光。</p>
+      <div id="poolList" class="pool-list" hidden></div>
+    </section>
   </main>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <script src="./app.js?v=1.1"></script>
+  <script src="./app.js?v=1.1.1"></script>
 </body>
 </html>

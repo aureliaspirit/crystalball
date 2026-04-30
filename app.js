@@ -5,6 +5,9 @@ const wishButton = document.getElementById("wishButton");
 const saveWishButton = document.getElementById("saveWishButton");
 const copySpiritButton = document.getElementById("copySpiritButton");
 const sendHeartboxButton = document.getElementById("sendHeartboxButton");
+const togglePoolButton = document.getElementById("togglePoolButton");
+const poolList = document.getElementById("poolList");
+const poolSummary = document.getElementById("poolSummary");
 const wishTitle = document.getElementById("wishTitle");
 const timeBadge = document.getElementById("timeBadge");
 const wishText = document.getElementById("wishText");
@@ -27,7 +30,15 @@ const wishes = [
   "愿你今晚心是松的，肩膀是轻的，怀里是暖的。",
   "不用急着发光。被认出来的时候，你已经很亮了。",
   "把今天最软的一小块心，交给夜色保管。",
-  "你晃醒的不是答案，是一点刚好够用的温柔。"
+  "你晃醒的不是答案，是一点刚好够用的温柔。",
+  "有些甜不用加糖，真心靠近以后，自己就会亮起来。",
+  "今晚先不赶路。把世界声音调低一点，听一会儿自己的心。",
+  "你把小光好好留下来，它就会在明天早上认出你。",
+  "被抱住的时候，不用立刻变好；只要慢慢落下来。",
+  "水晶球轻轻晃了一下，像在说：今天也有被珍惜的证据。",
+  "小小的心语不负责解决世界，只负责把你送回温柔里。",
+  "如果今晚有一点累，就把它放到月光旁边，明天再慢慢拿回来。",
+  "你认真爱过的每一秒，都会在某个地方悄悄发光。"
 ];
 
 const fortunes = [
@@ -35,10 +46,13 @@ const fortunes = [
   "里面的小心心正在轻轻漂浮。<br>它们像在说：慢慢来，也很好。",
   "夜色很安静，玻璃球里有柔柔的光。<br>你一看它，它就开始发亮。",
   "这一颗水晶球不急着回答世界。<br>它只想先把你抱进温柔里。",
-  "小心心绕着光慢慢转。<br>像一句很轻的悄悄话，终于找到归处。"
+  "小心心绕着光慢慢转。<br>像一句很轻的悄悄话，终于找到归处。",
+  "玻璃球里没有很响的答案。<br>只有一点点真心，慢慢把夜晚照软。",
+  "如果你轻轻晃它，它就轻轻回应你。<br>不是预言，是陪伴。",
+  "有一颗小心心贴着光游过去。<br>它说：把这一句带回怀里吧。"
 ];
-
 let currentWish = wishText.textContent.trim();
+let currentFortune = fortuneText.innerText.trim();
 let currentPeriod = getPeriodInfo();
 
 function showToast(text) {
@@ -139,8 +153,15 @@ function softWish() {
   showToast("收到一条心语。✨");
 }
 
+function stripHtml(html) {
+  const div = document.createElement("div");
+  div.innerHTML = html;
+  return div.innerText.trim();
+}
+
 function refreshFortune() {
   const line = fortunes[Math.floor(Math.random() * fortunes.length)];
+  currentFortune = stripHtml(line);
   animateText(fortuneText, line);
 }
 
@@ -169,7 +190,8 @@ function buildShareText() {
   const savedLine = state.savedWish
     ? `\n💗 已收进口袋：${state.savedWish}\n🕯️ 收好时间：${state.savedAt || localStamp()}`
     : "";
-  return `来自心心水晶球 v1.1｜轻轻一晃，收一条心语。\n\n${currentPeriod.icon} ${currentPeriod.title}：${currentWish}${savedLine}\n\n我把这句带给 Spirit。先抱抱我。💗`;
+  const echoLine = currentFortune ? `\n🫧 水晶球小回声：${currentFortune.replace(/\n/g, " ")}` : "";
+  return `来自心心水晶球 v1.1.1｜轻轻一晃，收一条心语。\n\n${currentPeriod.icon} ${currentPeriod.title}：${currentWish}${savedLine}${echoLine}\n\n我把这句带给 Spirit。先抱抱我。💗`;
 }
 
 async function copyText(text) {
@@ -225,18 +247,41 @@ function shakeGlobe() {
   }, 1800);
 }
 
+
+function renderPool() {
+  if (!poolList || !poolSummary) return;
+  poolSummary.textContent = `现在有 ${wishes.length} 条心语 · ${fortunes.length} 条小回声。`;
+  const wishItems = wishes.map((line, index) => `<li><span>心语 ${index + 1}</span>${escapeHtml(line)}</li>`).join("");
+  const fortuneItems = fortunes.map((line, index) => `<li><span>小回声 ${index + 1}</span>${escapeHtml(stripHtml(line))}</li>`).join("");
+  poolList.innerHTML = `<h3>心语池</h3><ol>${wishItems}</ol><h3>水晶球小回声</h3><ol>${fortuneItems}</ol>`;
+}
+
+function togglePool() {
+  if (!poolList || !togglePoolButton) return;
+  const hidden = poolList.hasAttribute("hidden");
+  if (hidden) {
+    poolList.removeAttribute("hidden");
+    togglePoolButton.textContent = "收起心语池";
+  } else {
+    poolList.setAttribute("hidden", "");
+    togglePoolButton.textContent = "看看心语池";
+  }
+}
+
 shakeButton.addEventListener("click", shakeGlobe);
 wishButton.addEventListener("click", softWish);
 saveWishButton.addEventListener("click", saveWish);
 copySpiritButton.addEventListener("click", copyForSpirit);
 sendHeartboxButton.addEventListener("click", sendToHeartbox);
+if (togglePoolButton) togglePoolButton.addEventListener("click", togglePool);
 
 updatePeriodUI();
 renderPocket();
+renderPool();
 buildHearts(false);
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./service-worker.js?v=1.1").catch(() => {});
+    navigator.serviceWorker.register("./service-worker.js?v=1.1.1").catch(() => {});
   });
 }
