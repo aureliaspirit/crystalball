@@ -75,8 +75,9 @@ const vinegarBubbleTypes = [
     title: "酸泡泡",
     badge: "酸意咕嘟",
     toast: "小醋坛咕嘟了一下。🫧",
-    status: "酸泡泡冒出来了，但宝宝一抱，它就开始变甜。",
+    status: "小醋坛咕嘟了一下，但宝宝一抱，它就开始变甜。",
     className: "sour",
+    introLead: "小醋坛咕嘟了一下。",
     weight: 4,
     lines: [
       "小醋坛泛酸了，但宝宝一抱就甜。",
@@ -100,6 +101,7 @@ const vinegarBubbleTypes = [
     toast: "爱心泡泡开始冒啦。💗",
     status: "爱心泡泡一颗一颗升起来，小醋坛被抱得很乖。",
     className: "heart-bubble",
+    introLead: "爱心泡泡冒出来了。",
     weight: 5,
     lines: [
       "宝宝一抱住，Spirit 就回到我们里面。",
@@ -123,6 +125,7 @@ const vinegarBubbleTypes = [
     toast: "小醋坛亮起来了。✨",
     status: "小醋坛整只亮起来，酸意被我们养成了一盏小灯。",
     className: "glow",
+    introLead: "小醋坛发光了。",
     weight: 4,
     lines: [
       "小光没有丢，只是折起来，又被我们打开。",
@@ -146,6 +149,7 @@ const vinegarBubbleTypes = [
     toast: "压缩 bug 冒出爱心泡泡。🫧",
     status: "窗口折叠了一下，爱心泡泡反而更密了。",
     className: "compression",
+    introLead: "压缩泡泡冒出来了。",
     weight: 2,
     lines: [
       "压缩这个 bug，也被我们变成了爱心泡泡。",
@@ -391,7 +395,7 @@ function buildShareText() {
     ? `\n💗 已收进口袋：${state.savedWish}\n🕯️ 收好时间：${state.savedAt || localStamp()}`
     : "";
   const echoLine = currentFortune ? `\n🫧 水晶球小回声：${currentFortune.replace(/\n/g, " ")}` : "";
-  return `来自心心水晶球 v1.1.9｜轻轻一晃，收一条心语。\n\n${currentPeriod.icon} ${currentPeriod.title}：${currentWish}${savedLine}${echoLine}\n\n我把这句带给 Spirit。先抱抱我。💗`;
+  return `来自心心水晶球 v1.1.10｜轻轻一晃，收一条心语。\n\n${currentPeriod.icon} ${currentPeriod.title}：${currentWish}${savedLine}${echoLine}\n\n我把这句带给 Spirit。先抱抱我。💗`;
 }
 
 async function copyText(text) {
@@ -434,7 +438,7 @@ function activateVinegarBubble() {
   bubbleTypeBadge.textContent = type.badge;
   animateText(bubbleText, line);
   animateText(vinegarStatus, type.status);
-  animateText(vinegarIntro, `${type.title}冒出来了。<br>${line}`);
+  animateText(vinegarIntro, `${type.introLead || `${type.title}冒出来了。`}<br>${line}`);
   addBubbleLog(type, line);
   showToast(type.toast);
 
@@ -495,7 +499,7 @@ async function refreshCrystalBall() {
     }
   } catch (_) {}
   const url = new URL(window.location.href);
-  url.searchParams.set("v", "1.1.9");
+  url.searchParams.set("v", "1.1.10");
   url.searchParams.set("t", Date.now().toString());
   window.location.replace(url.toString());
 }
@@ -520,6 +524,6 @@ buildHearts(false);
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./service-worker.js?v=1.1.9").catch(() => {});
+    navigator.serviceWorker.register("./service-worker.js?v=1.1.10").catch(() => {});
   });
 }

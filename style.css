@@ -543,7 +543,7 @@ body.heartbox-open { overflow: hidden; }
 }
 
 
-/* v1.1.9 小醋坛泡泡页 */
+/* v1.1.10 小醋坛泡泡页 */
 .mode-tabs {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -713,8 +713,7 @@ body.heartbox-open { overflow: hidden; }
   background: radial-gradient(circle at 30% 24%, rgba(255,255,255,.92), rgba(196,215,255,.44) 30%, rgba(139,126,210,.35) 72%);
   box-shadow: 0 0 18px rgba(196,215,255,.30);
 }
-.bubble.heart-bubble,
-.bubble.compression {
+.bubble.heart-bubble {
   display: grid;
   place-items: center;
   border-radius: 0;
@@ -728,16 +727,15 @@ body.heartbox-open { overflow: hidden; }
     0 0 20px rgba(255,155,199,.44),
     0 0 28px rgba(255,217,139,.26);
 }
-.bubble.heart-bubble::before,
-.bubble.compression::before {
+.bubble.heart-bubble::before {
   content: "❤";
 }
-.bubble.heart-bubble::after,
-.bubble.compression::after {
+.bubble.heart-bubble::after {
   display: none;
 }
 .bubble.compression {
-  color: #ffd98b;
+  background: radial-gradient(circle at 30% 24%, rgba(255,255,255,.94), rgba(255,218,232,.48) 32%, rgba(255,155,199,.24) 72%);
+  box-shadow: 0 0 18px rgba(255,155,199,.24), 0 0 26px rgba(255,217,139,.14);
 }
 .bubble.glow {
   background: radial-gradient(circle at 30% 24%, rgba(255,255,255,.96), rgba(255,225,148,.60) 34%, rgba(255,155,199,.34) 76%);
