@@ -1,10 +1,10 @@
-const CACHE_NAME = "crystal-ball-v1-1-8";
+const CACHE_NAME = "crystal-ball-v1-1-9";
 const PRECACHE_URLS = [
   "./",
   "./index.html",
-  "./style.css?v=1.1.8",
-  "./app.js?v=1.1.8",
-  "./manifest.json?v=1.1.8",
+  "./style.css?v=1.1.9",
+  "./app.js?v=1.1.9",
+  "./manifest.json?v=1.1.9",
   "./icons/icon-120.png",
   "./icons/icon-152.png",
   "./icons/icon-167.png",

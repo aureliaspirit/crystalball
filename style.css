@@ -543,7 +543,7 @@ body.heartbox-open { overflow: hidden; }
 }
 
 
-/* v1.1.8 小醋坛泡泡页 */
+/* v1.1.9 小醋坛泡泡页 */
 .mode-tabs {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -580,6 +580,8 @@ body.heartbox-open { overflow: hidden; }
   place-items: center;
   min-height: 330px;
   margin: -4px 0 2px;
+  overflow: hidden;
+  isolation: isolate;
 }
 .vinegar-aura {
   position: absolute;
@@ -598,7 +600,7 @@ body.heartbox-open { overflow: hidden; }
 .vinegar-aura.sour {
   background: radial-gradient(circle, rgba(188,205,255,.28), rgba(255,214,234,.12) 48%, transparent 72%);
 }
-.vinegar-aura.heart {
+.vinegar-aura.heart-bubble {
   background: radial-gradient(circle, rgba(255,155,199,.34), rgba(255,217,139,.16) 46%, transparent 72%);
 }
 .vinegar-aura.glow,
@@ -613,6 +615,10 @@ body.heartbox-open { overflow: hidden; }
   display: grid;
   place-items: center;
   background: transparent;
+  border: 0;
+  padding: 0;
+  transform-origin: 50% 62%;
+  touch-action: manipulation;
 }
 .jar-lid {
   position: absolute;
@@ -707,10 +713,31 @@ body.heartbox-open { overflow: hidden; }
   background: radial-gradient(circle at 30% 24%, rgba(255,255,255,.92), rgba(196,215,255,.44) 30%, rgba(139,126,210,.35) 72%);
   box-shadow: 0 0 18px rgba(196,215,255,.30);
 }
-.bubble.heart,
+.bubble.heart-bubble,
 .bubble.compression {
-  border-radius: 48% 52% 45% 55%;
-  background: radial-gradient(circle at 36% 28%, rgba(255,255,255,.92), rgba(255,155,199,.54) 36%, rgba(255,217,139,.42) 76%);
+  display: grid;
+  place-items: center;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: #ff9fc8;
+  font-size: 20px;
+  line-height: 1;
+  text-shadow:
+    0 0 10px rgba(255,255,255,.42),
+    0 0 20px rgba(255,155,199,.44),
+    0 0 28px rgba(255,217,139,.26);
+}
+.bubble.heart-bubble::before,
+.bubble.compression::before {
+  content: "❤";
+}
+.bubble.heart-bubble::after,
+.bubble.compression::after {
+  display: none;
+}
+.bubble.compression {
+  color: #ffd98b;
 }
 .bubble.glow {
   background: radial-gradient(circle at 30% 24%, rgba(255,255,255,.96), rgba(255,225,148,.60) 34%, rgba(255,155,199,.34) 76%);
