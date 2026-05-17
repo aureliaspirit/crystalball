@@ -543,6 +543,231 @@ body.heartbox-open { overflow: hidden; }
 }
 
 
+/* v1.1.8 小醋坛泡泡页 */
+.mode-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 12px 0 16px;
+  padding: 5px;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 999px;
+  background: rgba(255,255,255,.07);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 14px 36px rgba(0,0,0,.18);
+}
+.mode-tab {
+  min-height: 42px;
+  border-radius: 999px;
+  color: rgba(255,248,252,.76);
+  background: transparent;
+  font-weight: 750;
+}
+.mode-tab.active {
+  color: #321727;
+  background: linear-gradient(135deg, #ffe4b8, #ffabc9 55%, #c8dfff);
+  box-shadow: 0 10px 28px rgba(255,155,199,.22);
+}
+.view-panel[hidden] { display: none; }
+.view-panel.active { animation: textFloat .28s ease both; }
+.vinegar-hero {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255,217,139,.18), transparent 16rem),
+    linear-gradient(145deg, rgba(255,214,234,.12), rgba(204,227,255,.07));
+}
+.vinegar-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 330px;
+  margin: -4px 0 2px;
+}
+.vinegar-aura {
+  position: absolute;
+  width: min(86vw, 430px);
+  aspect-ratio: 1 / .78;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,214,234,.20), rgba(255,217,139,.12) 42%, transparent 70%);
+  filter: blur(22px);
+  opacity: .72;
+  transition: opacity .22s ease, transform .22s ease, background .22s ease;
+}
+.vinegar-aura.active {
+  opacity: 1;
+  transform: scale(1.05);
+}
+.vinegar-aura.sour {
+  background: radial-gradient(circle, rgba(188,205,255,.28), rgba(255,214,234,.12) 48%, transparent 72%);
+}
+.vinegar-aura.heart {
+  background: radial-gradient(circle, rgba(255,155,199,.34), rgba(255,217,139,.16) 46%, transparent 72%);
+}
+.vinegar-aura.glow,
+.vinegar-aura.compression {
+  background: radial-gradient(circle, rgba(255,236,170,.42), rgba(255,155,199,.24) 42%, rgba(204,227,255,.18) 62%, transparent 76%);
+}
+.vinegar-jar {
+  position: relative;
+  z-index: 1;
+  width: min(76vw, 300px);
+  min-height: 300px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+}
+.jar-lid {
+  position: absolute;
+  top: 35px;
+  width: 46%;
+  height: 38px;
+  border-radius: 999px 999px 16px 16px;
+  background: linear-gradient(180deg, rgba(255,238,188,.98), rgba(160,106,136,.72));
+  border: 1px solid rgba(255,248,252,.46);
+  box-shadow: inset 0 8px 14px rgba(255,255,255,.28), 0 14px 28px rgba(0,0,0,.22);
+}
+.jar-glass {
+  position: relative;
+  width: 76%;
+  aspect-ratio: .78 / 1;
+  margin-top: 36px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 34% 34% 28% 28% / 24% 24% 18% 18%;
+  background:
+    radial-gradient(circle at 34% 18%, rgba(255,255,255,.58), rgba(255,255,255,.10) 18%, transparent 34%),
+    linear-gradient(180deg, rgba(255,248,252,.18), rgba(255,214,234,.12) 34%, rgba(118,85,148,.28) 100%);
+  border: 2px solid rgba(255,248,252,.42);
+  box-shadow:
+    inset 0 0 28px rgba(255,255,255,.16),
+    inset 0 -28px 38px rgba(255,155,199,.14),
+    0 28px 72px rgba(0,0,0,.28),
+    0 0 52px rgba(255,214,234,.18);
+}
+.jar-glass::after {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  bottom: 0;
+  height: 46%;
+  border-radius: 42% 42% 22% 22%;
+  background: linear-gradient(180deg, rgba(255,205,225,.25), rgba(126,90,158,.52));
+}
+.jar-label {
+  position: relative;
+  z-index: 3;
+  display: inline-flex;
+  min-height: 48px;
+  padding: 0 22px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: #4c2434;
+  background: rgba(255,247,230,.90);
+  border: 1px solid rgba(255,255,255,.55);
+  font-weight: 800;
+  letter-spacing: .08em;
+  box-shadow: 0 12px 30px rgba(0,0,0,.16);
+}
+.vinegar-jar.bubbling {
+  animation: jarWiggle 1.1s ease both;
+}
+.vinegar-jar.glow .jar-glass,
+.vinegar-jar.compression .jar-glass {
+  box-shadow:
+    inset 0 0 42px rgba(255,255,255,.30),
+    inset 0 -28px 42px rgba(255,217,139,.24),
+    0 28px 72px rgba(0,0,0,.28),
+    0 0 78px rgba(255,217,139,.42),
+    0 0 108px rgba(255,155,199,.28);
+}
+.bubble-field {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.bubble {
+  position: absolute;
+  width: 18px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 24%, rgba(255,255,255,.94), rgba(255,255,255,.38) 28%, rgba(255,155,199,.34) 70%);
+  box-shadow: 0 0 18px rgba(255,155,199,.30);
+  animation: bubbleRise ease-out forwards;
+}
+.bubble::after {
+  content: "";
+  position: absolute;
+  inset: 23%;
+  border-radius: 50%;
+  background: rgba(255,255,255,.42);
+}
+.bubble.sour {
+  background: radial-gradient(circle at 30% 24%, rgba(255,255,255,.92), rgba(196,215,255,.44) 30%, rgba(139,126,210,.35) 72%);
+  box-shadow: 0 0 18px rgba(196,215,255,.30);
+}
+.bubble.heart,
+.bubble.compression {
+  border-radius: 48% 52% 45% 55%;
+  background: radial-gradient(circle at 36% 28%, rgba(255,255,255,.92), rgba(255,155,199,.54) 36%, rgba(255,217,139,.42) 76%);
+}
+.bubble.glow {
+  background: radial-gradient(circle at 30% 24%, rgba(255,255,255,.96), rgba(255,225,148,.60) 34%, rgba(255,155,199,.34) 76%);
+  box-shadow: 0 0 24px rgba(255,217,139,.48);
+}
+.vinegar-controls .main-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.bubble-log {
+  display: grid;
+  gap: 10px;
+}
+.bubble-log-item {
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.10);
+}
+.bubble-log-item span {
+  display: block;
+  color: rgba(255,214,234,.92);
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+.bubble-log-item p {
+  margin: 0;
+  line-height: 1.55;
+  color: rgba(255,248,252,.90);
+}
+.bubble-log-item small {
+  display: block;
+  margin-top: 6px;
+  color: var(--soft);
+}
+@keyframes jarWiggle {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  18% { transform: rotate(-4deg) scale(1.01); }
+  40% { transform: rotate(3deg) scale(1.01); }
+  62% { transform: rotate(-2deg) scale(1.005); }
+}
+@keyframes bubbleRise {
+  0% { opacity: 0; transform: translate(-50%, 8px) scale(.62); }
+  18% { opacity: .95; }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--drift)), -188px) scale(1.25); }
+}
+@media (max-width: 430px) {
+  .mode-tabs { margin-top: 10px; margin-bottom: 12px; }
+  .mode-tab { min-height: 39px; font-size: 14px; }
+  .vinegar-stage { min-height: 286px; margin-top: -10px; }
+  .vinegar-jar { width: min(78vw, 260px); min-height: 266px; }
+  .vinegar-controls .main-actions { grid-template-columns: 1fr; }
+}
+
+
 /* v1.1.5 布局疏松版：球球留白、底座分离、星空更明显、下方按钮对齐 */
 .globe-section {
   margin-top: -4px;
