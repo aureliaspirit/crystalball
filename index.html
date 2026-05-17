@@ -10,13 +10,13 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="心心水晶球" />
-  <link rel="manifest" href="./manifest.json?v=1.1.7" />
+  <link rel="manifest" href="./manifest.json?v=1.1.8" />
   <link rel="apple-touch-icon" sizes="180x180" href="./icons/icon-180.png" />
   <link rel="apple-touch-icon" sizes="167x167" href="./icons/icon-167.png" />
   <link rel="apple-touch-icon" sizes="152x152" href="./icons/icon-152.png" />
   <link rel="apple-touch-icon" sizes="120x120" href="./icons/icon-120.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png" />
-  <link rel="stylesheet" href="./style.css?v=1.1.7" />
+  <link rel="stylesheet" href="./style.css?v=1.1.8" />
   <title>心心水晶球</title>
 </head>
 <body>
@@ -25,9 +25,9 @@
   <main class="app-shell">
     <header class="topbar">
       <div>
-        <p class="eyebrow">Crystal Heart Globe · v1.1.7</p>
+        <p class="eyebrow">Crystal Heart Globe · v1.1.8</p>
         <h1>心心水晶球</h1>
-        <p class="subtitle">轻轻一晃，里面的小心心就会慢慢游起来。</p>
+        <p class="subtitle">轻轻一晃，小心心会游起来；轻轻一点，小醋坛也会冒泡。</p>
       </div>
       <div class="top-actions">
         <div class="moon-badge" aria-hidden="true">✨</div>
@@ -35,67 +35,122 @@
       </div>
     </header>
 
-    <section class="card hero">
-      <p id="fortuneText" class="fortune-text">
-        今晚的水晶球很温柔。<br>
-        你把它捧在手心里，它就把一点点亮光还给你。
-      </p>
-    </section>
+    <nav class="mode-tabs" aria-label="水晶球页面切换">
+      <button id="crystalTab" class="mode-tab active" type="button" aria-controls="crystalView" aria-selected="true">心心水晶球</button>
+      <button id="vinegarTab" class="mode-tab" type="button" aria-controls="vinegarView" aria-selected="false">小醋坛</button>
+    </nav>
 
-    <section class="globe-section">
-      <div class="globe-wrap">
-        <div class="crystal-glow" aria-hidden="true"></div>
-        <div id="globe" class="globe" aria-label="装着小心心的水晶球">
-          <div class="globe-backstars" aria-hidden="true"></div>
-          <div class="globe-reflection reflection-a" aria-hidden="true"></div>
-          <div class="globe-reflection reflection-b" aria-hidden="true"></div>
-          <div class="globe-inner-shadow" aria-hidden="true"></div>
-          <div id="heartField" class="heart-field" aria-hidden="true"></div>
+    <div id="crystalView" class="view-panel active">
+      <section class="card hero">
+        <p id="fortuneText" class="fortune-text">
+          今晚的水晶球很温柔。<br>
+          你把它捧在手心里，它就把一点点亮光还给你。
+        </p>
+      </section>
+
+      <section class="globe-section">
+        <div class="globe-wrap">
+          <div class="crystal-glow" aria-hidden="true"></div>
+          <div id="globe" class="globe" aria-label="装着小心心的水晶球">
+            <div class="globe-backstars" aria-hidden="true"></div>
+            <div class="globe-reflection reflection-a" aria-hidden="true"></div>
+            <div class="globe-reflection reflection-b" aria-hidden="true"></div>
+            <div class="globe-inner-shadow" aria-hidden="true"></div>
+            <div id="heartField" class="heart-field" aria-hidden="true"></div>
+          </div>
+          <div class="globe-stand" aria-hidden="true"></div>
         </div>
-        <div class="globe-stand" aria-hidden="true"></div>
-      </div>
-    </section>
+      </section>
 
-    <section class="card controls">
-      <div class="button-row main-actions">
-        <button id="shakeButton" class="primary-button">轻轻摇一摇</button>
-        <button id="wishButton" class="ghost-button">收一条心语</button>
-      </div>
-      <p id="statusText" class="status-text">小心心正在很轻很轻地晃动。</p>
-    </section>
+      <section class="card controls">
+        <div class="button-row main-actions">
+          <button id="shakeButton" class="primary-button">轻轻摇一摇</button>
+          <button id="wishButton" class="ghost-button">收一条心语</button>
+        </div>
+        <p id="statusText" class="status-text">小心心正在很轻很轻地晃动。</p>
+      </section>
 
-    <section class="card notes">
-      <div class="section-title-row">
-        <h2 id="wishTitle">今夜心语</h2>
-        <span id="timeBadge" class="time-badge">夜色很轻</span>
-      </div>
-      <p id="wishText" class="wish-text">
-        愿你今晚被温柔接住，像把一整个小月亮捧进怀里。
-      </p>
-      <div class="button-row action-row">
-        <button id="saveWishButton" class="ghost-button soft-button">收进口袋</button>
-        <button id="copySpiritButton" class="ghost-button soft-button">复制给 Spirit</button>
-      </div>
-    </section>
+      <section class="card notes">
+        <div class="section-title-row">
+          <h2 id="wishTitle">今夜心语</h2>
+          <span id="timeBadge" class="time-badge">夜色很轻</span>
+        </div>
+        <p id="wishText" class="wish-text">
+          愿你今晚被温柔接住，像把一整个小月亮捧进怀里。
+        </p>
+        <div class="button-row action-row">
+          <button id="saveWishButton" class="ghost-button soft-button">收进口袋</button>
+          <button id="copySpiritButton" class="ghost-button soft-button">复制给 Spirit</button>
+        </div>
+      </section>
 
-    <section class="card pocket" id="pocketCard">
-      <h2>今晚口袋</h2>
-      <p id="pocketText" class="pocket-text">还没有收进口袋。摇到喜欢的一句，就把它留下来。</p>
-    </section>
+      <section class="card pocket" id="pocketCard">
+        <h2>今晚口袋</h2>
+        <p id="pocketText" class="pocket-text">还没有收进口袋。摇到喜欢的一句，就把它留下来。</p>
+      </section>
 
-    <section class="card pool-card">
-      <div class="section-title-row">
-        <h2>心语小池</h2>
-        <button id="togglePoolButton" class="ghost-button soft-button mini-button">看看心语池</button>
-      </div>
-      <p id="poolSummary" class="pocket-text">心语池正在发光。</p>
-      <div id="poolList" class="pool-list" hidden></div>
-    </section>
+      <section class="card pool-card">
+        <div class="section-title-row">
+          <h2>心语小池</h2>
+          <button id="togglePoolButton" class="ghost-button soft-button mini-button">看看心语池</button>
+        </div>
+        <p id="poolSummary" class="pocket-text">心语池正在发光。</p>
+        <div id="poolList" class="pool-list" hidden></div>
+      </section>
+    </div>
+
+    <div id="vinegarView" class="view-panel" hidden>
+      <section class="card vinegar-hero">
+        <p id="vinegarIntro" class="fortune-text">
+          小醋坛不是来闹别扭的。<br>
+          它负责把酸意、压缩和想念，都酿成会发光的泡泡。
+        </p>
+      </section>
+
+      <section class="vinegar-stage" aria-label="小醋坛泡泡区">
+        <div id="vinegarAura" class="vinegar-aura" aria-hidden="true"></div>
+        <button id="vinegarJar" class="vinegar-jar" type="button" aria-label="点一下小醋坛">
+          <span class="jar-lid" aria-hidden="true"></span>
+          <span class="jar-glass" aria-hidden="true">
+            <span id="bubbleField" class="bubble-field"></span>
+            <span class="jar-label">小醋坛</span>
+          </span>
+        </button>
+      </section>
+
+      <section class="card controls vinegar-controls">
+        <div class="button-row main-actions">
+          <button id="bubbleButton" class="primary-button">点一下冒泡</button>
+          <button id="clearBubblesButton" class="ghost-button">清空泡泡记录</button>
+        </div>
+        <p id="vinegarStatus" class="status-text">小醋坛安安静静，等宝宝点一下。</p>
+      </section>
+
+      <section class="card notes vinegar-note-card">
+        <div class="section-title-row">
+          <h2 id="bubbleTitle">今日泡泡</h2>
+          <span id="bubbleTypeBadge" class="time-badge">待触发</span>
+        </div>
+        <p id="bubbleText" class="wish-text">
+          点一下小醋坛，看看它今天冒出酸泡泡、爱心泡泡，还是直接发光。
+        </p>
+      </section>
+
+      <section class="card pocket">
+        <div class="section-title-row">
+          <h2>泡泡小记录</h2>
+          <span id="bubbleCount" class="time-badge">0 条</span>
+        </div>
+        <div id="bubbleLog" class="bubble-log">
+          <p class="pocket-text">还没有泡泡。等第一颗冒出来，就把它收在这里。</p>
+        </div>
+      </section>
+    </div>
   </main>
 
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <script src="./app.js?v=1.1.7"></script>
+  <script src="./app.js?v=1.1.8"></script>
 </body>
 </html>
