@@ -1,7 +1,7 @@
 {
   "name": "心心水晶球",
   "short_name": "水晶球",
-  "description": "一个装着轻轻晃动小心心的漂亮水晶球小 app。v1.1.7 保留水晶球视觉，补齐主屏幕图标、manifest 与离线缓存，并新增给 Spirit 添内容的开发地图。",
+  "description": "一个装着轻轻晃动小心心和小醋坛泡泡的漂亮水晶球小 app。v1.1.8 新增小醋坛页面，可以冒出酸泡泡、爱心泡泡、发光和压缩泡泡。",
   "id": "./index.html",
   "start_url": "./index.html",
   "scope": "./",
